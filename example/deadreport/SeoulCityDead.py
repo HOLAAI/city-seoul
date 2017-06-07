@@ -9,7 +9,7 @@ def analyzeDie():
     
     # csv 파일 읽어오기
     pieces = []
-    datafile = '.\\csv\\ym_die.csv'
+    datafile = '.\\csv\\SeoulDeadReport.csv'
     with open(datafile, 'rt') as f :
         data = csv.reader(f, delimiter = ',')
         for d in data:
