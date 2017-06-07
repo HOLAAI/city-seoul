@@ -9,7 +9,7 @@ def analyzeDie():
     
     # csv 파일 읽어오기
     pieces = []
-    datafile = 'D:\\plotTest\\ym_die.csv'
+    datafile = '.\\csv\\ym_die.csv'
     with open(datafile, 'rt') as f :
         data = csv.reader(f, delimiter = ',')
         for d in data:

@@ -9,7 +9,7 @@ def analyzePollutionDie():
     
     # 연도 및 월별 서울시 사망자 현황 csv 파일 읽어오기
     dieData = []
-    dieDatafile = 'D:\\plotTest\\ym_die.csv'
+    dieDatafile = '.\\csv\\ym_die.csv'
     with open(dieDatafile, 'rt') as f :
         data = csv.reader(f, delimiter = ',')
         for d in data:
@@ -26,7 +26,7 @@ def analyzePollutionDie():
 
     # 2016년 대기오염 평균 csv 파일 읽어오기
     pollutionData = []
-    polltutionDatafile = 'D:\\plotTest\\Airpollution.csv'
+    polltutionDatafile = '.\\csv\\Airpollution.csv'
     with open(polltutionDatafile, 'rt') as f :
         data = csv.reader(f, delimiter = ',')
         for d in data:
