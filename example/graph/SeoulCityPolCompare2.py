@@ -3,6 +3,7 @@
 import numpy as np
 import math  as mt
 from matplotlib import pyplot as plt, font_manager, rc
+
 from operator import eq
 import csv
 import sys
@@ -26,6 +27,7 @@ def analyzePollutionCompare():
                pollutionData[colIdx1-1].insert(colIdx2, float(d))
                
     # 정규화 처리
+    # 공식 : (X - min(X') / (max(X') - min(X'))
     for idx, pol in enumerate(pollutionData):
         minVal = max(pollutionData[idx])
         maxVal = min(pollutionData[idx])
@@ -34,13 +36,13 @@ def analyzePollutionCompare():
            pollutionData[idx][valIdx] = (pollutionData[idx][valIdx] - minVal) / rangeVal 
 
     # 오염 제목 리스트
-    polName = ["이산화질소농도", "오존농도", "일산화탄소농도", "아황산가스", "미세먼지", "초미세먼지"]
+    polName = ["이산화질소", "오존", "일산화탄소", "아황산가스", "미세먼지", "초미세먼지"]
        
     # X축 월별 배열 정보 선언
     month = ['1','2','3','4','5','6','7','8','9','10','11','12']
 
     # 비교대상 오염정보 Index
-    nPolIndex = 2
+    nPolIndex = 0
     
     # 2016년 대기오염 정보 plot 설정
     f, axarr = plt.subplots(2, 3)
@@ -53,8 +55,9 @@ def analyzePollutionCompare():
 
         axarr[xIdx, yIdx].plot(month, pollutionData[nPolIndex], 'b-o', label=polName[nPolIndex])
         axarr[xIdx, yIdx].plot(month, data, 'r-s', label=polName[idx])
-        axarr[xIdx, yIdx].set_xlabel('Month')
-        axarr[xIdx, yIdx].set_ylabel('Pollution1')
+        axarr[xIdx, yIdx].set_title(polName[nPolIndex]+" / "+polName[idx])
+        #axarr[xIdx, yIdx].set_xlabel("월")
+        axarr[xIdx, yIdx].set_ylabel("오염도 ")
         axarr[xIdx, yIdx].legend()
         
         yIdx += 1
