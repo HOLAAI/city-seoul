@@ -32,8 +32,8 @@ def analyzePollutionCompare():
     
     # 정규화 처리
     for idx, pol in enumerate(pollutionData):
-        minVal = max(pollutionData[idx])
-        maxVal = min(pollutionData[idx])
+        minVal = min(pollutionData[idx])
+        maxVal = max(pollutionData[idx])
         for valIdx, val in enumerate(pol):
            rangeVal = (maxVal - minVal)
            pollutionData[idx][valIdx] = (pollutionData[idx][valIdx] - minVal) / rangeVal 

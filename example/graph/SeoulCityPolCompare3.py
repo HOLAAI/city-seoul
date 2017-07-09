@@ -29,8 +29,8 @@ def analyzePollutionCompare():
     # 정규화 처리
     # 공식 : (X - min(X') / (max(X') - min(X'))
     for idx, pol in enumerate(pollutionData):
-        minVal = max(pollutionData[idx])
-        maxVal = min(pollutionData[idx])
+        minVal = min(pollutionData[idx])
+        maxVal = max(pollutionData[idx])
         for valIdx, val in enumerate(pol):
            rangeVal = (maxVal - minVal)
            pollutionData[idx][valIdx] = (pollutionData[idx][valIdx] - minVal) / rangeVal 
@@ -53,7 +53,7 @@ def analyzePollutionCompare():
     for idx, data in enumerate(pollutionData):
         if idx == nPolIndex: continue
 
-        axarr[xIdx, yIdx].plot(year, pollutionData[nPolIndex], 'b-o', label=polName[nPolIndex])
+        axarr[xIdx, yIdx].plot(year, pollutionData[nPolIndex], '-o', label=polName[nPolIndex], color='b')
         axarr[xIdx, yIdx].plot(year, data, 'r-s', label=polName[idx])
         axarr[xIdx, yIdx].set_title(polName[nPolIndex]+" / "+polName[idx])
         #axarr[xIdx, yIdx].set_xlabel("월")
