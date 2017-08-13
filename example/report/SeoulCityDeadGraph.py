@@ -8,7 +8,7 @@ from operator import eq
 import csv
 import sys
 
-def analyzePollutionCompare():
+def analyzeProc():
     reload(sys)
     sys.setdefaultencoding('utf-8')
     font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
@@ -20,9 +20,8 @@ def analyzePollutionCompare():
     yearIdx = 0
     monthIdx = 0
     pollutionData = [[[0 for col in range(0)] for row in range(5)] for row in range(10)]
-    
-    polltutionDatafile = 'csv/Airpollution_tot.csv'
-    with open(polltutionDatafile, 'rt') as f :
+    polltutionDataFile = 'csv/Airpollution_tot.csv'
+    with open(polltutionDataFile, 'rt') as f :
         rowData = csv.reader(f, delimiter = ',')
         for colIdx2, data in enumerate(rowData):
             for colIdx1, value in enumerate(data):
@@ -50,6 +49,40 @@ def analyzePollutionCompare():
                    rangeVal = (maxVal - minVal)
                    pollutionData[idx1][idx2][idx3] = (pollutionData[idx1][idx2][idx3] - minVal) / rangeVal
     
+    # 연도별 사망자 csv 파일 읽어오기
+    bf_date = ''
+    yearIdx = 0
+    monthIdx = 0
+    deadData = [[0 for col in range(0)] for row in range(10)] 
+    deadDataFile = 'csv/DeadData.csv'
+    with open(deadDataFile, 'rt') as f :
+        rowData = csv.reader(f, delimiter = ',')
+        for colIdx2, data in enumerate(rowData):
+            for colIdx1, value in enumerate(data):
+                if colIdx1 == 0 :
+                    if eq(bf_date, '') == True :
+                        bf_date = value[:4]
+                    elif eq(bf_date, value[:4]) == False : # 연도별로 데이터 담기
+                        bf_date = value[:4]
+                        yearIdx += 1
+                        monthIdx = 0
+                    continue
+                
+                # [연도별][오염종류별][오염수치]
+                deadData[yearIdx].insert(monthIdx, float(value))
+                
+            monthIdx += 1
+    
+    # 정규화 처리
+    # 공식 : (X - min(X') / (max(X') - min(X'))
+    for idx1, data in enumerate(deadData):
+        minVal = min(data)
+        maxVal = max(data)
+        for idx2, val in enumerate(data):
+           rangeVal = (maxVal - minVal)
+           deadData[idx1][idx2] = (deadData[idx1][idx2] - minVal) / rangeVal
+    
+    
     # 오염 제목 리스트
     polName = ["이산화질소", "오존", "일산화탄소", "아황산가스", "미세먼지"]
        
@@ -59,33 +92,28 @@ def analyzePollutionCompare():
     # 그래프 수치 년도
     year = ['2007','2008','2009','2010','2011','2012','2013','2014','2015','2016']
     
-    # 그래프 수치 표시 색상
-    color = ['#99FF00','#6600FF','#333333','#FF9966','#FF6666','#CC3399','#CC0033','#339900','#0000FF','#663333']
-    
-    # 비교대상 오염정보 Index
-    nPolIndex = 0
-    
     # 대기오염 정보 plot 설정
-    f, axarr = plt.subplots(2, 3)
+    f, axarr = plt.subplots(4, 3)
 
     # 오염 종류 및 연도별 노출
-    xIdx = 0
-    yIdx = 0
-    for val1 in range(0, 5):
-        for val2 in range(0, 10):
-            axarr[xIdx, yIdx].set_title(polName[val1])
-            axarr[xIdx, yIdx].plot(month, pollutionData[val2][val1], '-o', label=year[val2], color=color[val2])
-            axarr[xIdx, yIdx].set_ylabel("오염도 ")
-            axarr[xIdx, yIdx].legend()
-            
-        yIdx += 1 
+    xIdx = 2
+    plotX = 0
+    plotY = 0
+    for yearIdx in range(0, 10):
+        axarr[plotX, plotY].set_title(year[yearIdx])
+        axarr[plotX, plotY].plot(month, pollutionData[yearIdx][xIdx], '-o', label=polName[xIdx], color='b')
+        axarr[plotX, plotY].plot(month, deadData[yearIdx], 'r-s', label='사망자', color='r')
+        axarr[plotX, plotY].set_ylabel("오염도 ")
+        axarr[plotX, plotY].legend()
 
-        if (yIdx > 2) :
-            xIdx += 1
-            yIdx = 0
+        plotY += 1 
+
+        if (plotY > 2) :
+            plotX += 1
+            plotY = 0
                  
     # 그래프 노출
     plt.show()
 
 if __name__== '__main__':
-    analyzePollutionCompare()
+    analyzeProc()

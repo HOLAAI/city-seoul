@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-# 서울시 대기오염별 관계 그래프 (연속으로 노출하기)
+# 서울시 대기오염별 사망자 관계 그래프 (연속으로 노출하기)
 import numpy as np
 import math  as mt
 from matplotlib import pyplot as plt, font_manager, rc
@@ -49,6 +49,10 @@ def analyzePollutionCompare():
                 for idx3, val in enumerate(polData):
                    rangeVal = (maxVal - minVal)
                    pollutionData[idx1][idx2][idx3] = (pollutionData[idx1][idx2][idx3] - minVal) / rangeVal
+
+
+
+
     
     # 오염 제목 리스트
     polName = ["이산화질소", "오존", "일산화탄소", "아황산가스", "미세먼지"]

@@ -4,3 +4,7 @@
 
 우선 첫번째로 서울시 대기오염과 사망자간의 그래프 수치를 비교해보고자 합니다.
 
+* SeoulCityPolCompare1 : 
+* SeoulCityPolCompare2 : 
+* SeoulCityPolCompare3 : 
+* SeoulCityPolCompare4 : 

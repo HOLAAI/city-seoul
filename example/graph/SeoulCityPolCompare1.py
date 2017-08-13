@@ -23,7 +23,7 @@ def analyzePollutionCompare():
     # 2016년 대기오염 평균 csv 파일 읽어오기
     # 연도, 이산화질소농도(ppm), 오존농도(ppm), 일산화탄소농도(ppm), 아황산가스(ppm), 미세먼지(㎍/㎥), 초미세먼지(㎍/㎥)
     pollutionData = [[0 for col in range(0)] for row in range(7)]
-    polltutionDatafile = '.\\csv\\SeoulAirpollution.csv'
+    polltutionDatafile = 'csv/SeoulAirpollution.csv'
     with open(polltutionDatafile, 'rt') as f :
         rowData = csv.reader(f, delimiter = ',')
         for colIdx2, data in enumerate(rowData):

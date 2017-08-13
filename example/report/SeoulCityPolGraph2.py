@@ -8,7 +8,7 @@ from operator import eq
 import csv
 import sys
 
-def analyzePollutionCompare():
+def analyzeProc():
     reload(sys)
     sys.setdefaultencoding('utf-8')
     font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
@@ -59,33 +59,29 @@ def analyzePollutionCompare():
     # 그래프 수치 년도
     year = ['2007','2008','2009','2010','2011','2012','2013','2014','2015','2016']
     
-    # 그래프 수치 표시 색상
-    color = ['#99FF00','#6600FF','#333333','#FF9966','#FF6666','#CC3399','#CC0033','#339900','#0000FF','#663333']
-    
-    # 비교대상 오염정보 Index
-    nPolIndex = 0
-    
     # 대기오염 정보 plot 설정
-    f, axarr = plt.subplots(2, 3)
+    f, axarr = plt.subplots(4, 3)
 
     # 오염 종류 및 연도별 노출
-    xIdx = 0
-    yIdx = 0
-    for val1 in range(0, 5):
-        for val2 in range(0, 10):
-            axarr[xIdx, yIdx].set_title(polName[val1])
-            axarr[xIdx, yIdx].plot(month, pollutionData[val2][val1], '-o', label=year[val2], color=color[val2])
-            axarr[xIdx, yIdx].set_ylabel("오염도 ")
-            axarr[xIdx, yIdx].legend()
-            
-        yIdx += 1 
+    xIdx = 2
+    yIdx = 4
+    plotX = 0
+    plotY = 0
+    for yearIdx in range(0, 10):
+        axarr[plotX, plotY].set_title(year[yearIdx])
+        axarr[plotX, plotY].plot(month, pollutionData[yearIdx][xIdx], '-o', label=polName[xIdx], color='b')
+        axarr[plotX, plotY].plot(month, pollutionData[yearIdx][yIdx], 'r-s', label=polName[yIdx], color='r')
+        axarr[plotX, plotY].set_ylabel("오염도 ")
+        axarr[plotX, plotY].legend()
 
-        if (yIdx > 2) :
-            xIdx += 1
-            yIdx = 0
+        plotY += 1 
+
+        if (plotY > 2) :
+            plotX += 1
+            plotY = 0
                  
     # 그래프 노출
     plt.show()
 
 if __name__== '__main__':
-    analyzePollutionCompare()
+    analyzeProc()
