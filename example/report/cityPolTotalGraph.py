@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
-# 서울시 대기오염별 관계 그래프 (년월별로 노출하기)
+# 2007~2016 대기오염 vs 대기오염 합산 비교 그래프 (개발중..)
 import numpy as np
 import math  as mt
 from matplotlib import pyplot as plt, font_manager, rc
