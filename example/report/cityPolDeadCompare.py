@@ -24,8 +24,8 @@ def analyzeProc():
     monthIdx = 0
     pollutionData = [[[0 for col in range(0)] for row in range(5)] for row in range(10)]
     for data in pollutionFileData:
-        for colIdx1, value in enumerate(data):
-            if colIdx1 == 0 :
+        for idx1, value in enumerate(data):
+            if idx1 == 0 :
                 if eq(bf_date, '') == True :
                     bf_date = value[:4]
                 elif eq(bf_date, value[:4]) == False : # 연도별로 데이터 담기
@@ -35,7 +35,7 @@ def analyzeProc():
                 continue
             
             # [연도별][오염종류별][오염수치]
-            pollutionData[yearIdx][colIdx1-1].insert(monthIdx, float(value))
+            pollutionData[yearIdx][idx1-1].insert(monthIdx, float(value))
             
         monthIdx += 1
                 
@@ -51,8 +51,8 @@ def analyzeProc():
     monthIdx = 0
     deadData = [[0 for col in range(0)] for row in range(10)] 
     for data in deadFileData:
-        for colIdx1, value in enumerate(data):
-            if colIdx1 == 0 :
+        for idx1, value in enumerate(data):
+            if idx1 == 0 :
                 if eq(bf_date, '') == True :
                     bf_date = value[:4]
                 elif eq(bf_date, value[:4]) == False : # 연도별로 데이터 담기
