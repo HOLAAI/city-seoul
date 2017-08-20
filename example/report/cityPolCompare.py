@@ -11,7 +11,7 @@ import util.plotEncodingUtil as pltEncoding
 from util.fileReaderUtil import ExcelFileReader
 import util.dataCalUtil as dataNormalUtil
 
-def analyzeProc():
+def analyzeProc(): 
     # matplot 그래프 한글 인식 인코딩
     pltEncoding.plotKrRecognition()
 
